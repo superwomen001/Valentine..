@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Baby 💕</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Comic Sans MS',cursive;
+  background:linear-gradient(135deg,#ff9ecf,#ffcce6);
+  overflow:hidden;
+  text-align:center;
+  color:white;
+}
+
+/* Floating hearts */
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+
+.container{
+  position:relative;
+  top:50%;
+  transform:translateY(-50%);
+  padding:20px;
+}
+
+img{
+  width:280px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+button{
+  padding:12px 25px;
+  border-radius:30px;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+  margin:10px;
+  transition:0.3s;
+}
+
+.yes{
+  background:white;
+  color:#ff4da6;
+}
+
+.no{
+  background:black;
+  color:white;
+  position:absolute;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+#main, #scene2{
+  display:none;
+}
+
+input{
+  padding:10px;
+  border-radius:20px;
+  border:none;
+  text-align:center;
+}
+
+/* Explosion */
+.explosion{
+  position:absolute;
+  font-size:30px;
+  animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+  0%{transform:scale(0);opacity:1;}
+  100%{transform:scale(2);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div class="container" id="lock">
+  <h2>Only for my handsome baby 😌💖</h2>
+  <input type="password" id="pass" placeholder="Enter secret word">
+  <br><br>
+  <button onclick="unlock()">Unlock 😘</button>
+</div>
+
+<!-- MAIN SCENE -->
+<div class="container" id="main">
+  <h1 id="typing"></h1>
+  <img src="https://i.imgur.com/8Km9tLL.png">
+  <br>
+  <button class="yes" onclick="nextScene()">Tap to see what I wanna do to you 😏</button>
+  <button class="no" id="runBtn">No 😳</button>
+</div>
+
+<!-- SECOND SCENE -->
+<div class="container" id="scene2">
+  <h1>COME HEREEEE 😘</h1>
+  <img src="https://i.imgur.com/OYVpe2W.png">
+  <h2>*Playfully bites you* 😈💋</h2>
+  <h3>Now you’re stuck with me forever 💕</h3>
+</div>
+
+<script>
+
+/* UNLOCK FUNCTION */
+function unlock(){
+  const password=document.getElementById("pass").value.trim().toLowerCase();
+  
+  if(password==="baby"){
+    document.getElementById("lock").style.display="none";
+    document.getElementById("main").style.display="block";
+    startTyping();
+    startHearts();
+  }else{
+    alert("Wrong password 😝 Try again cutie");
+  }
+}
+
+/* TYPING EFFECT */
+function startTyping(){
+  const text="Happy Valentine’s Day baby 💕 You’re mine forever 😌";
+  const typing=document.getElementById("typing");
+  typing.innerHTML="";
+  let i=0;
+
+  function type(){
+    if(i<text.length){
+      typing.innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(type,50);
+    }
+  }
+  type();
+}
+
+/* FLOATING HEARTS */
+function startHearts(){
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=Math.random()*20+15+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  },300);
+}
+
+/* RUNNING BUTTON */
+window.onload=function(){
+  const runBtn=document.getElementById("runBtn");
+  runBtn.addEventListener("mouseover",function(){
+    runBtn.style.left=Math.random()*80+"vw";
+    runBtn.style.top=Math.random()*80+"vh";
+  });
+};
+
+/* NEXT SCENE */
+function nextScene(){
+
+  for(let i=0;i<25;i++){
+    const exp=document.createElement("div");
+    exp.className="explosion";
+    exp.innerHTML="💘";
+    exp.style.left=Math.random()*100+"vw";
+    exp.style.top=Math.random()*100+"vh";
+    document.body.appendChild(exp);
+    setTimeout(()=>exp.remove(),1000);
+  }
+
+  document.getElementById("main").style.display="none";
+  document.getElementById("scene2").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
